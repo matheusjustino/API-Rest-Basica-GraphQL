@@ -1,0 +1,21 @@
+# Schema do GraphQL
+
+# Este User não é o User do banco de dados, é o formato do usuário dentro da requisição na API
+type User {
+    id: ID! # o tipo ID em GraphQL é sempre maiúsculo. A exclamação (!) no final é para indicar que o campo é obrigatório.
+    name: String!
+    email: String!
+}
+
+type Query {
+    users: [User!]! # A query irá retornar um array de User.
+    # [User!] diz que tudo que está dentro do array tem que ser to tipo User.
+    # [User]! diz que toda requisição para User deve retornar um array, mesmo que vazio.
+    user(id: ID!): User # A query irá retonar um único User. Caso o ID não exista nada será retornado.
+}
+
+type Mutation {
+    createUser(name: String!, email: String!): User # Criando um User e retornando o mesmo.
+    removeUserById(id: String!): User
+    updateUser(oldName: String!, newName: String!): User # Retorno sem funcionar. // TODO
+}
